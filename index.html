@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft-Like Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #87CEEB;
+        }
+
+        #gameCanvas {
+            display: grid;
+            grid-template-columns: repeat(20, 32px);
+            grid-template-rows: repeat(20, 32px);
+            gap: 2px;
+        }
+
+        .block {
+            width: 32px;
+            height: 32px;
+            background-color: #98FB98;
+            border: 1px solid #555;
+        }
+
+        .dirt {
+            background-color: #8B4513;
+        }
+
+        .grass {
+            background-color: #32CD32;
+        }
+
+        .stone {
+            background-color: #A9A9A9;
+        }
+
+        #controls {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #controls button {
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameCanvas"></div>
+
+    <div id="controls">
+        <button id="dirt">Dirt Block</button>
+        <button id="grass">Grass Block</button>
+        <button id="stone">Stone Block</button>
+    </div>
+
+    <script>
+        const gameCanvas = document.getElementById('gameCanvas');
+        const blocks = [];
+        const rows = 20;
+        const cols = 20;
+        let selectedBlock = 'dirt';
+
+        // Create the grid of blocks
+        for (let row = 0; row < rows; row++) {
+            for (let col = 0; col < cols; col++) {
+                const block = document.createElement('div');
+                block.classList.add('block');
+                block.dataset.row = row;
+                block.dataset.col = col;
+
+                block.addEventListener('click', () => {
+                    block.className = `block ${selectedBlock}`;
+                });
+
+                gameCanvas.appendChild(block);
+                blocks.push(block);
+            }
+        }
+
+        // Block selection buttons
+        document.getElementById('dirt').addEventListener('click', () => {
+            selectedBlock = 'dirt';
+        });
+
+        document.getElementById('grass').addEventListener('click', () => {
+            selectedBlock = 'grass';
+        });
+
+        document.getElementById('stone').addEventListener('click', () => {
+            selectedBlock = 'stone';
+        });
+    </script>
+</body>
+</html>
